@@ -91,22 +91,31 @@ export default function Home() {
           <div className={styles.about}>
             <h2 className={styles.sectionTitle}>About</h2>
             <div className={styles.aboutBody}>
-              <p>
-                Ph.D. in mathematics turned production AI engineer. I work at the intersection of
-                machine learning, data infrastructure, and the practical problems real organizations face —
-                particularly in government and civic technology.
-              </p>
-              <p>
-                At <strong>DICE (Data Innovation &amp; Civic Engineering)</strong>, I build end-to-end:
-                agentic AI systems that cite their sources, data pipelines that migrate decades of legacy
-                records, and platforms that handle sensitive PII with appropriate care. My clients are
-                county governments, planning commissions, and the residents they serve.
-              </p>
-              <p>
-                I co-founded <strong>MI-GAIN</strong>, a statewide peer network for Michigan government AI
-                practitioners, and stay involved in the broader question of how public institutions can
-                responsibly adopt AI tools.
-              </p>
+            <p>
+              Ph.D. in mathematics (graph theory, Western Michigan University) turned
+              production AI and data engineer. I build end-to-end — agentic AI systems,
+              data pipelines, full-stack platforms — and work directly with the
+              stakeholders who will use what I ship. The problems I solve are real and
+              immediate: a planning office fielding the same zoning questions all day, a
+              grant administrator processing paper applications across ten municipalities,
+              three legacy government websites that needed to be off Classic ASP by March 31st.
+            </p>
+            <p>
+              I'm a Digital Solutions Specialist at Van Buren County's 
+              Digital Information Department, operating under <strong>DICE (Digital Innovation
+              Collaborative Exchange)</strong> — an intergovernmental agreement serving
+              Van Buren County, St. Joseph County, and regional partners including Market
+              One and the Southwest Michigan Planning Commission. In practice that means
+              I build production software for multiple government clients from a single
+              team, with the infrastructure decisions and deployment patterns I establish
+              becoming the standard across all of them.
+            </p>
+            <p>
+              I co-founded <strong>MI-GAIN</strong> (Michigan Government AI Network), a
+              statewide peer network for government AI practitioners, and stay engaged in
+              the broader question of how public institutions can responsibly adopt AI —
+              not as a philosophical exercise, but as someone actively building those systems.
+            </p>
             </div>
           </div>
         </div>
