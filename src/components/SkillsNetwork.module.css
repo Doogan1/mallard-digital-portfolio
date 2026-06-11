@@ -1,0 +1,48 @@
+.wrapper {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.node {
+  cursor: pointer;
+}
+
+.info {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 12px 20px;
+  border-top: 1px solid var(--border);
+  min-height: 44px;
+}
+
+.infoTag {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent-violet);
+  flex-shrink: 0;
+}
+
+.infoMeta {
+  font-size: 13px;
+  color: var(--text-muted);
+  flex: 1;
+}
+
+.infoHint {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  opacity: 0.6;
+  margin-left: auto;
+}
