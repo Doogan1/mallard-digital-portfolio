@@ -1,0 +1,104 @@
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(74,158,255,0.3);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.35);
+}
+
+.topRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.statusDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+.titleLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+.titleLink:hover { text-decoration: none; }
+
+.title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  transition: color 0.15s;
+}
+
+.titleLink:hover .title {
+  color: var(--accent);
+}
+
+.summary {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  flex: 1;
+}
+
+.footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: auto;
+  flex-wrap: wrap;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.moreTag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  padding: 3px 6px;
+  align-self: center;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.liveLink {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.liveLink:hover {
+  text-decoration: underline;
+}
+
+.year {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+}

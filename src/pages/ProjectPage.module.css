@@ -1,0 +1,150 @@
+.page {
+  padding-bottom: 96px;
+}
+
+.back {
+  display: inline-block;
+  font-size: 14px;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 24px 0 20px;
+  transition: color 0.15s;
+}
+
+.back:hover {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 48px;
+  align-items: start;
+}
+
+/* Article */
+.articleHeader {
+  margin-bottom: 40px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--border);
+}
+
+.headerMeta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: clamp(1.6rem, 3vw, 2.25rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--text);
+  line-height: 1.2;
+  margin-bottom: 14px;
+}
+
+.summary {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+/* Sidebar */
+.sidebar {
+  position: sticky;
+  top: 76px;
+}
+
+.sidebarCard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.sidebarSection {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.sidebarSection:first-child {
+  padding-top: 0;
+}
+
+.sidebarSection:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.sidebarLabel {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.sidebarValue {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.liveButton {
+  display: block;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--bg);
+  background: var(--accent);
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+
+.liveButton:hover {
+  opacity: 0.9;
+  text-decoration: none;
+}
+
+.repoLink {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.repoLink:hover {
+  color: var(--accent);
+}
+
+.tagList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  .sidebar {
+    position: static;
+    order: -1;
+  }
+}

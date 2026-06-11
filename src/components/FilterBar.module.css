@@ -1,0 +1,62 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.group {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding-top: 4px;
+  flex-shrink: 0;
+  min-width: 68px;
+}
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tagCloud {
+  gap: 5px;
+}
+
+.pill {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 4px 12px;
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s, border-color 0.15s;
+  font-family: var(--font-display);
+}
+
+.pill:hover {
+  color: var(--text);
+  border-color: rgba(74,158,255,0.4);
+  background: rgba(74,158,255,0.06);
+}
+
+.pillActive {
+  color: var(--accent);
+  border-color: rgba(74,158,255,0.5);
+  background: rgba(74,158,255,0.1);
+}
