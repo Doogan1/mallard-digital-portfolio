@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { loadProjects } from '../lib/parseProjects'
 import type { ProjectCategory } from '../lib/types'
 import ProjectCard from '../components/ProjectCard'
@@ -7,8 +8,14 @@ import styles from './Projects.module.css'
 
 export default function Projects() {
   const projects = loadProjects()
+  const [searchParams, setSearchParams] = useSearchParams()
   const [activeCategory, setActiveCategory] = useState<ProjectCategory | 'all'>('all')
-  const [activeTag, setActiveTag] = useState<string | null>(null)
+  const [activeTag, setActiveTag] = useState<string | null>(searchParams.get('tag'))
+
+  function handleTagChange(tag: string | null) {
+    setActiveTag(tag)
+    setSearchParams(tag ? { tag } : {}, { replace: true })
+  }
 
   const allTags = useMemo(() => {
     const freq = new Map<string, number>()
@@ -40,7 +47,7 @@ export default function Projects() {
         activeTag={activeTag}
         allTags={allTags}
         onCategoryChange={setActiveCategory}
-        onTagChange={setActiveTag}
+        onTagChange={handleTagChange}
       />
 
       <div className={styles.grid}>
@@ -49,7 +56,7 @@ export default function Projects() {
             key={p.slug}
             project={p}
             highlightTag={activeTag ?? undefined}
-            onTagClick={setActiveTag}
+            onTagClick={handleTagChange}
           />
         ))}
         {filtered.length === 0 && (

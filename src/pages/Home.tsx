@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { loadProjects } from '../lib/parseProjects'
 import ProjectCard from '../components/ProjectCard'
 import styles from './Home.module.css'
@@ -7,6 +7,7 @@ const GITHUB_URL = 'https://github.com/Doogan1'
 const LINKEDIN_URL = 'https://linkedin.com/in/drake-olejniczak'
 
 export default function Home() {
+  const navigate = useNavigate()
   const projects = loadProjects()
   const featured = projects.filter((p) => p.featured)
 
@@ -79,7 +80,14 @@ export default function Home() {
           </p>
           <div className={styles.tagCloud}>
             {allTags.map((tag) => (
-              <span key={tag} className="tag">{tag}</span>
+              <button
+                key={tag}
+                className="tag tag--filter"
+                type="button"
+                onClick={() => navigate(`/projects?tag=${encodeURIComponent(tag)}`)}
+              >
+                {tag}
+              </button>
             ))}
           </div>
         </div>
