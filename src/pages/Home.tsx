@@ -65,7 +65,11 @@ export default function Home() {
           </div>
           <div className={styles.grid}>
             {featured.map((p) => (
-              <ProjectCard key={p.slug} project={p} />
+              <ProjectCard
+                key={p.slug}
+                project={p}
+                onTagClick={(tag) => navigate(`/projects?tag=${encodeURIComponent(tag)}`)}
+              />
             ))}
           </div>
         </div>
