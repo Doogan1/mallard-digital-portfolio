@@ -39,7 +39,6 @@ export const SKILL_CATEGORIES: Record<
 export const SKILL_REGISTRY: Record<string, SkillCategory> = {
   // Web Development
   'React': 'web-development',
-  'React 18': 'web-development',
   'TypeScript': 'web-development',
   'Vite': 'web-development',
   'D3.js': 'web-development',
@@ -54,7 +53,6 @@ export const SKILL_REGISTRY: Record<string, SkillCategory> = {
   'FastAPI': 'backend',
   'Node.js': 'backend',
   'Express': 'backend',
-  'PHP': 'backend',
   'PHP 8': 'backend',
   'asyncpg': 'backend',
 
@@ -81,9 +79,8 @@ export const SKILL_REGISTRY: Record<string, SkillCategory> = {
 
   // AI & ML
   'Claude API': 'ai-ml',
-  'Anthropic Claude API': 'ai-ml',
-  'Anthropic Claude Vision API': 'ai-ml',
-  'Anthropic Batch API': 'ai-ml',
+  'Claude Vision API': 'ai-ml',
+  'Claude Batch API': 'ai-ml',
   'OpenAI Embeddings': 'ai-ml',
   'Chatbase': 'ai-ml',
 

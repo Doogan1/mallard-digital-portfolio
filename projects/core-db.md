@@ -10,7 +10,7 @@ stack:
   - Python
   - FastAPI
   - asyncpg
-  - React 18
+  - React
   - TypeScript
   - Vite
   - Cloud Run

@@ -18,7 +18,7 @@ summary: >
 
 ## Concept
 
-A portfolio is a set of projects, but it's also a graph. Technologies don't appear in isolation — they appear together. FastAPI and PostgreSQL appear together constantly. Claude API shows up with pgvector. React 18 pairs with TypeScript and Vite.
+A portfolio is a set of projects, but it's also a graph. Technologies don't appear in isolation — they appear together. FastAPI and PostgreSQL appear together constantly. Claude API shows up with pgvector. React pairs with TypeScript and Vite.
 
 The Skills Network makes this structure visible: a force-directed graph where technology nodes are sized by how frequently they appear across projects, and edges connect technologies that co-occur in at least one project. Edge weight reflects how many projects share that pairing.
 

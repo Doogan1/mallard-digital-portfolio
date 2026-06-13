@@ -13,7 +13,7 @@ stack:
   - BigQuery
   - Cloud Storage
   - Looker Studio
-  - Anthropic Claude API
+  - Claude API
   - WordPress
 summary: >
   Four production AI chatbots deployed across Van Buren and St. Joseph County websites,

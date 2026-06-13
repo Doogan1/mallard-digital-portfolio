@@ -12,8 +12,8 @@ stack:
   - PostgreSQL
   - ACF Pro
   - WP-CLI
-  - Anthropic Claude Vision API
-  - Anthropic Batch API
+  - Claude Vision API
+  - Claude Batch API
   - Cloud SQL
 summary: >
   Eight custom WordPress plugins powering the public websites for Van Buren County and

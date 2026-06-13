@@ -10,7 +10,7 @@ live_url: https://swmpc.org
 featured: true
 stack:
   - Python
-  - PHP
+  - PHP 8
   - WordPress
   - WP-CLI
   - MySQL

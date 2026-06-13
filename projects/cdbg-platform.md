@@ -7,7 +7,7 @@ year_started: 2026
 client: Market One / Van Buren & Cass Counties
 featured: true
 stack:
-  - React 18
+  - React
   - TypeScript
   - Vite
   - Firebase Hosting
