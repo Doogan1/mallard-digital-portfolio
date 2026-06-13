@@ -4,7 +4,6 @@ slug: zip
 status: pilot
 year_started: 2025
 client: Van Buren County / DICE
-live_url: https://zip.dicemi.org
 featured: true
 stack:
   - FastAPI
@@ -22,7 +21,7 @@ stack:
 summary: >
   An AI-powered zoning assistant for Van Buren County residents. Residents click a parcel on
   an interactive map and ask plain-English questions about what they can do with their land —
-  the system answers with precise citations from the actual zoning ordinance.
+  the system answers with precise citations from the actual zoning ordinance.  Demo available upon request.
 ---
 
 ## What It Does
