@@ -66,4 +66,4 @@ The chunks are sized to fit cleanly in context while preserving enough surroundi
 
 Built entirely solo, end-to-end — from the initial PDF parsing pipeline through the agent architecture, PostGIS integration, MapLibre frontend, and Cloud Run deployment.
 
-The project is now in a maintenance and extension phase. I've set up a Cloud Build CI/CD pipeline so that Jerry, a GIS developer at Van Buren County, can extend the map layers and ordinance data independently without requiring my direct involvement on every change. The handoff pattern — clear build pipeline, documented schema, working CI — is something I try to build into every project I hand over.
+The project is now in a maintenance and extension phase. I've set up a Cloud Build CI/CD pipeline so that Jerry, a GIS developer and Director at Van Buren County, can extend the map layers and ordinance data independently without requiring my direct involvement on every change. The handoff pattern — clear build pipeline, documented schema, working CI — is something I try to build into every project I hand over.
