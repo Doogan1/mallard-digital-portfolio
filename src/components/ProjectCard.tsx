@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import type { Project } from '../lib/types'
+import StackTag from './StackTag'
 import styles from './ProjectCard.module.css'
 
 interface Props {
@@ -37,14 +38,13 @@ export default function ProjectCard({ project, highlightTag, onTagClick }: Props
       <div className={styles.footer}>
         <div className={styles.tags}>
           {visibleTags.map((tag) => (
-            <button
+            <StackTag
               key={tag}
-              className={`tag tag--filter ${highlightTag === tag ? 'tag--active' : ''}`}
-              onClick={() => onTagClick?.(tag)}
-              type="button"
-            >
-              {tag}
-            </button>
+              tag={tag}
+              filter={!!onTagClick}
+              active={highlightTag === tag}
+              onClick={onTagClick ? () => onTagClick(tag) : undefined}
+            />
           ))}
           {project.stack.length > 5 && (
             <span className={styles.moreTag}>+{project.stack.length - 5}</span>

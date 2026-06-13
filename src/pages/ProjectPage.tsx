@@ -2,6 +2,12 @@ import { useParams, Link, Navigate } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { getProject } from '../lib/parseProjects'
+import {
+  getSkillCategory,
+  SKILL_CATEGORIES,
+  SKILL_CATEGORY_ORDER,
+} from '../lib/skills'
+import StackTag from '../components/StackTag'
 import styles from './ProjectPage.module.css'
 
 const STATUS_LABELS: Record<string, string> = {
@@ -16,6 +22,11 @@ export default function ProjectPage() {
   const project = getProject(slug ?? '')
 
   if (!project) return <Navigate to="/projects" replace />
+
+  const stackByCategory = SKILL_CATEGORY_ORDER.map((category) => ({
+    category,
+    tags: project.stack.filter((tag) => getSkillCategory(tag) === category),
+  })).filter((group) => group.tags.length > 0)
 
   return (
     <div className={`fade-in ${styles.page}`}>
@@ -91,9 +102,21 @@ export default function ProjectPage() {
 
             <div className={styles.sidebarSection}>
               <p className={styles.sidebarLabel}>Stack</p>
-              <div className={styles.tagList}>
-                {project.stack.map((tag) => (
-                  <span key={tag} className="tag">{tag}</span>
+              <div className={styles.stackGroups}>
+                {stackByCategory.map(({ category, tags }) => (
+                  <div key={category} className={styles.stackGroup}>
+                    <p
+                      className={styles.stackGroupLabel}
+                      style={{ color: SKILL_CATEGORIES[category].color }}
+                    >
+                      {SKILL_CATEGORIES[category].label}
+                    </p>
+                    <div className={styles.tagList}>
+                      {tags.map((tag) => (
+                        <StackTag key={tag} tag={tag} />
+                      ))}
+                    </div>
+                  </div>
                 ))}
               </div>
             </div>

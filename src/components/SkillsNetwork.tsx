@@ -1,7 +1,15 @@
-import { useMemo, useState, useRef, useEffect } from 'react'
+import { useMemo, useState, useRef, useEffect, type CSSProperties } from 'react'
 import { useNavigate } from 'react-router-dom'
 import * as d3 from 'd3'
 import { loadProjects } from '../lib/parseProjects'
+import {
+  getSkillCategory,
+  getNodeColors,
+  SKILL_CATEGORIES,
+  SKILL_CATEGORY_ORDER,
+  type SkillCategory,
+} from '../lib/skills'
+import StackTag from './StackTag'
 import styles from './SkillsNetwork.module.css'
 
 const W = 960
@@ -71,6 +79,7 @@ export default function SkillsNetwork() {
   const zoomBehavior = useRef<d3.ZoomBehavior<SVGSVGElement, unknown> | null>(null)
   const dragRef = useRef<DragState | null>(null)
   const [isPanning, setIsPanning] = useState(false)
+  const [activeCategory, setActiveCategory] = useState<SkillCategory | 'all'>('all')
 
   // Run simulation once, derive positions
   const { simNodes, resolvedLinks } = useMemo(() => {
@@ -247,16 +256,29 @@ export default function SkillsNetwork() {
               const pos = positions.get(node.id)
               if (!pos) return null
               const r = nodeRadius(node.count)
+              const category = getSkillCategory(node.id)
+              const categoryMismatch = activeCategory !== 'all' && category !== activeCategory
               const isHovered = hovered === node.id
               const isConnected = connectedTo.has(node.id)
-              const isDim = hovered !== null && !isHovered && !isConnected
+              const isDim =
+                categoryMismatch ||
+                (hovered !== null && !isHovered && !isConnected)
+
+              const nodeState = isHovered
+                ? 'hover'
+                : isConnected
+                ? 'connected'
+                : isDim
+                ? 'dim'
+                : 'default'
+              const colors = getNodeColors(category, nodeState)
 
               return (
                 <g
                   key={node.id}
                   transform={`translate(${pos.x},${pos.y})`}
                   style={{
-                    opacity: isDim ? 0.18 : 1,
+                    opacity: categoryMismatch ? 0.12 : isDim ? 0.18 : 1,
                     cursor: 'pointer',
                     transition: 'opacity 0.12s',
                   }}
@@ -271,20 +293,8 @@ export default function SkillsNetwork() {
 
                   <circle
                     r={r}
-                    fill={
-                      isHovered
-                        ? 'rgba(124,106,247,0.5)'
-                        : isConnected
-                        ? 'rgba(124,106,247,0.28)'
-                        : 'rgba(124,106,247,0.12)'
-                    }
-                    stroke={
-                      isHovered
-                        ? '#a99fff'
-                        : isConnected
-                        ? 'rgba(124,106,247,0.65)'
-                        : 'rgba(124,106,247,0.35)'
-                    }
+                    fill={colors.fill}
+                    stroke={colors.stroke}
                     strokeWidth={isHovered ? 2 : 1.5}
                     style={{ transition: 'fill 0.12s, stroke 0.12s' }}
                   />
@@ -294,7 +304,7 @@ export default function SkillsNetwork() {
                     dy="0.35em"
                     textAnchor="middle"
                     fontSize={Math.max(8, Math.min(11, r * 0.85))}
-                    fill={isHovered ? '#e8eaf0' : isConnected ? '#c0c3d0' : '#7a7f94'}
+                    fill={colors.text}
                     fontFamily="JetBrains Mono, monospace"
                     fontWeight={isHovered ? 600 : 400}
                     style={{ pointerEvents: 'none', userSelect: 'none', transition: 'fill 0.12s' }}
@@ -323,11 +333,38 @@ export default function SkillsNetwork() {
         </g>
       </svg>
 
+      {/* Category legend + filter */}
+      <div className={styles.legend}>
+        <button
+          type="button"
+          className={`${styles.legendItem} ${activeCategory === 'all' ? styles.legendItemActive : ''}`}
+          onClick={() => setActiveCategory('all')}
+        >
+          All
+        </button>
+        {SKILL_CATEGORY_ORDER.filter((c) => c !== 'other').map((category) => {
+          const { label, color } = SKILL_CATEGORIES[category]
+          const isActive = activeCategory === category
+          return (
+            <button
+              key={category}
+              type="button"
+              className={`${styles.legendItem} ${isActive ? styles.legendItemActive : ''}`}
+              style={{ '--legend-color': color } as CSSProperties}
+              onClick={() => setActiveCategory(isActive ? 'all' : category)}
+            >
+              <span className={styles.legendDot} />
+              {label}
+            </button>
+          )
+        })}
+      </div>
+
       {/* Info panel */}
       <div className={styles.info}>
         {hoveredNode ? (
           <>
-            <span className={styles.infoTag}>{hoveredNode.id}</span>
+            <StackTag tag={hoveredNode.id} />
             <span className={styles.infoMeta}>
               {hoveredNode.count} project{hoveredNode.count !== 1 ? 's' : ''} —{' '}
               {hoveredProjects.map((p) => p.title).join(', ')}

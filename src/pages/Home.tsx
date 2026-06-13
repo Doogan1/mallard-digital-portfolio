@@ -1,6 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { loadProjects } from '../lib/parseProjects'
+import { getStackTagsByCategory, SKILL_CATEGORIES, SKILL_CATEGORY_ORDER } from '../lib/skills'
 import ProjectCard from '../components/ProjectCard'
+import StackTag from '../components/StackTag'
 import styles from './Home.module.css'
 
 const GITHUB_URL = 'https://github.com/Doogan1'
@@ -10,15 +12,7 @@ export default function Home() {
   const navigate = useNavigate()
   const projects = loadProjects()
   const featured = projects.filter((p) => p.featured)
-
-  const allTags = Array.from(
-    projects.reduce<Map<string, number>>((acc, p) => {
-      p.stack.forEach((t) => acc.set(t, (acc.get(t) ?? 0) + 1))
-      return acc
-    }, new Map()),
-  )
-    .sort((a, b) => b[1] - a[1])
-    .map(([tag]) => tag)
+  const tagsByCategory = getStackTagsByCategory(projects)
 
   return (
     <div className="fade-in">
@@ -82,17 +76,29 @@ export default function Home() {
           <p className={styles.sectionSub}>
             Derived from {projects.length} production projects across AI, data, and full-stack engineering.
           </p>
-          <div className={styles.tagCloud}>
-            {allTags.map((tag) => (
-              <button
-                key={tag}
-                className="tag tag--filter"
-                type="button"
-                onClick={() => navigate(`/projects?tag=${encodeURIComponent(tag)}`)}
-              >
-                {tag}
-              </button>
-            ))}
+          <div className={styles.stackGroups}>
+            {SKILL_CATEGORY_ORDER.map((category) => {
+              const tags = tagsByCategory.get(category) ?? []
+              if (tags.length === 0) return null
+              const { label, color } = SKILL_CATEGORIES[category]
+              return (
+                <div key={category} className={styles.skillGroup}>
+                  <span className={styles.skillGroupLabel} style={{ color }}>
+                    {label}
+                  </span>
+                  <div className={styles.tagCloud}>
+                    {tags.map((tag) => (
+                      <StackTag
+                        key={tag}
+                        tag={tag}
+                        filter
+                        onClick={() => navigate(`/projects?tag=${encodeURIComponent(tag)}`)}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )
+            })}
           </div>
         </div>
       </section>

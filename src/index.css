@@ -94,7 +94,7 @@ code, kbd, samp, pre {
 .badge--in-progress { background: rgba(124,106,247,0.15); color: var(--accent-violet); }
 .badge--archived  { background: rgba(122,127,148,0.15); color: var(--text-muted); }
 
-/* Stack tag pill */
+/* Stack tag pill — category colors applied via inline styles from skills.ts */
 .tag {
   display: inline-block;
   font-family: var(--font-mono);
@@ -102,23 +102,18 @@ code, kbd, samp, pre {
   font-weight: 500;
   padding: 3px 8px;
   border-radius: 4px;
-  background: rgba(124,106,247,0.15);
-  color: var(--accent-violet);
-  border: 1px solid rgba(124,106,247,0.25);
+  border: 1px solid transparent;
   cursor: default;
-  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  transition: background 0.15s, color 0.15s, border-color 0.15s, opacity 0.15s;
   white-space: nowrap;
-}
-
-.tag:hover,
-.tag--active {
-  background: rgba(124,106,247,0.28);
-  color: #a99fff;
-  border-color: rgba(124,106,247,0.5);
 }
 
 .tag--filter {
   cursor: pointer;
+}
+
+.tag--filter:hover {
+  filter: brightness(1.15);
 }
 
 /* Category tag */

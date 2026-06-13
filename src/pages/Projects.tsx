@@ -2,6 +2,8 @@ import { useState, useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { loadProjects } from '../lib/parseProjects'
 import type { ProjectCategory } from '../lib/types'
+import type { SkillCategory } from '../lib/skills'
+import { projectHasStackTag, projectMatchesSkillCategory } from '../lib/skills'
 import ProjectCard from '../components/ProjectCard'
 import FilterBar from '../components/FilterBar'
 import styles from './Projects.module.css'
@@ -10,6 +12,7 @@ export default function Projects() {
   const projects = loadProjects()
   const [searchParams, setSearchParams] = useSearchParams()
   const [activeCategory, setActiveCategory] = useState<ProjectCategory | 'all'>('all')
+  const [activeSkillCategory, setActiveSkillCategory] = useState<SkillCategory | 'all'>('all')
   const [activeTag, setActiveTag] = useState<string | null>(searchParams.get('tag'))
 
   function handleTagChange(tag: string | null) {
@@ -17,21 +20,14 @@ export default function Projects() {
     setSearchParams(tag ? { tag } : {}, { replace: true })
   }
 
-  const allTags = useMemo(() => {
-    const freq = new Map<string, number>()
-    projects.forEach((p) => p.stack.forEach((t) => freq.set(t, (freq.get(t) ?? 0) + 1)))
-    return Array.from(freq.entries())
-      .sort((a, b) => b[1] - a[1])
-      .map(([tag]) => tag)
-  }, [projects])
-
   const filtered = useMemo(() => {
     return projects.filter((p) => {
       if (activeCategory !== 'all' && p.category !== activeCategory) return false
-      if (activeTag && !p.stack.includes(activeTag)) return false
+      if (!projectMatchesSkillCategory(p, activeSkillCategory)) return false
+      if (activeTag && !projectHasStackTag(p, activeTag)) return false
       return true
     })
-  }, [projects, activeCategory, activeTag])
+  }, [projects, activeCategory, activeSkillCategory, activeTag])
 
   return (
     <div className={`container fade-in ${styles.page}`}>
@@ -43,10 +39,12 @@ export default function Projects() {
       </div>
 
       <FilterBar
+        projects={projects}
         activeCategory={activeCategory}
+        activeSkillCategory={activeSkillCategory}
         activeTag={activeTag}
-        allTags={allTags}
         onCategoryChange={setActiveCategory}
+        onSkillCategoryChange={setActiveSkillCategory}
         onTagChange={handleTagChange}
       />
 

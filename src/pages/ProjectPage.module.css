@@ -139,6 +139,21 @@
   gap: 5px;
 }
 
+.stackGroups {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.stackGroupLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+
 @media (max-width: 900px) {
   .layout {
     grid-template-columns: 1fr;
