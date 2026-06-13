@@ -3,7 +3,7 @@ title: Core DB — County Directory Admin
 slug: core-db
 status: active
 category: full-stack
-year_started: 2024
+year_started: 2026
 client: Van Buren County / St. Joseph County
 featured: false
 stack:

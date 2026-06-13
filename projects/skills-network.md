@@ -3,7 +3,8 @@ title: Skills & Project Network
 slug: skills-network
 status: in-progress
 category: data-engineering
-year_started: 2024
+year_started: 2026
+live_url: https://portfolio.mallard-digital.com/drake-olejniczak/skills
 featured: false
 stack:
   - D3.js
@@ -32,4 +33,4 @@ The result is a map of how I actually work — not a list of skills, but a pictu
 
 ## Status
 
-Paused. Planned for portfolio site v2. The data model is straightforward — it derives entirely from the `stack` arrays in the project markdown files — but the D3 implementation is a meaningful UI investment. The stub page is live in v1 as a placeholder.
+V1 complete and live on portfolio site.

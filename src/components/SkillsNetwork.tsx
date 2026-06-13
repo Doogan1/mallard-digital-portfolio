@@ -7,6 +7,9 @@ import styles from './SkillsNetwork.module.css'
 const W = 960
 const H = 620
 
+/** Set to true to allow dragging individual nodes. */
+const ENABLE_NODE_DRAG = false
+
 interface GraphNode extends d3.SimulationNodeDatum {
   id: string
   count: number
@@ -147,6 +150,7 @@ export default function SkillsNetwork() {
   // Node drag — stop native event so D3 zoom doesn't also fire
   function onNodePointerDown(id: string, e: React.PointerEvent<SVGGElement>) {
     e.nativeEvent.stopPropagation()
+    if (!ENABLE_NODE_DRAG) return
     const pos = positions.get(id)
     if (!pos) return
     dragRef.current = {
@@ -161,7 +165,7 @@ export default function SkillsNetwork() {
   }
 
   function onNodePointerMove(e: React.PointerEvent<SVGGElement>) {
-    if (!dragRef.current) return
+    if (!ENABLE_NODE_DRAG || !dragRef.current) return
     const { id, startClientX, startClientY, startNodeX, startNodeY } = dragRef.current
     const dx = (e.clientX - startClientX) / zoomRef.current.k
     const dy = (e.clientY - startClientY) / zoomRef.current.k
@@ -174,6 +178,7 @@ export default function SkillsNetwork() {
   }
 
   function onNodePointerUp() {
+    if (!ENABLE_NODE_DRAG) return
     dragRef.current = null
   }
 
@@ -331,7 +336,7 @@ export default function SkillsNetwork() {
           </>
         ) : (
           <span className={styles.infoHint}>
-            hover · click to filter · drag nodes · scroll to zoom · double-click to reset
+            hover · click to filter · scroll to zoom · double-click to reset
           </span>
         )}
       </div>

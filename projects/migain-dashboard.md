@@ -3,7 +3,7 @@ title: MI-GAIN — Michigan Government AI Network
 slug: migain-dashboard
 status: active
 category: data-engineering
-year_started: 2024
+year_started: 2026
 client: MI-GAIN (co-founded)
 live_url: https://dicemi.org/migain-survey-and-results/
 featured: false
