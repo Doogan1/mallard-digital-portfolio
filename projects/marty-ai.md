@@ -4,6 +4,7 @@ slug: marty-ai
 status: live
 year_started: 2024
 client: Van Buren County / St. Joseph County
+live_url: https://vanburencountymi.gov
 featured: false
 stack:
   - Chatbase

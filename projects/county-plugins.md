@@ -4,6 +4,7 @@ slug: county-plugins
 status: maintained
 year_started: 2025
 client: Van Buren County / St. Joseph County
+live_url: https://stjosephcountymi.gov
 featured: false
 stack:
   - PHP 8
