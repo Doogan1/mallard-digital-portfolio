@@ -1,7 +1,7 @@
 ---
 title: Core DB — County Directory Admin
 slug: core-db
-status: active
+status: live
 year_started: 2026
 client: Van Buren County / St. Joseph County
 featured: false

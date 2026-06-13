@@ -10,14 +10,8 @@ import {
 } from '../lib/skills'
 import SkillCategoryBadge from '../components/SkillCategoryBadge'
 import StackTag from '../components/StackTag'
+import StatusTrack from '../components/StatusTrack'
 import styles from './ProjectPage.module.css'
-
-const STATUS_LABELS: Record<string, string> = {
-  active: 'Active',
-  complete: 'Complete',
-  'in-progress': 'In Progress',
-  archived: 'Archived',
-}
 
 export default function ProjectPage() {
   const { slug } = useParams<{ slug: string }>()
@@ -44,10 +38,6 @@ export default function ProjectPage() {
         <article className={styles.main}>
           <header className={styles.articleHeader}>
             <div className={styles.headerMeta}>
-              <span className={`badge badge--${project.status}`}>
-                <span className={styles.dot} />
-                {STATUS_LABELS[project.status]}
-              </span>
               <div className={styles.categoryTags}>
                 {skillCategories.map((category) => (
                   <SkillCategoryBadge key={category} category={category} />
@@ -56,6 +46,9 @@ export default function ProjectPage() {
             </div>
             <h1 className={styles.title}>{project.title}</h1>
             <p className={styles.summary}>{project.summary}</p>
+            <div className={styles.statusTrack}>
+              <StatusTrack status={project.status} />
+            </div>
           </header>
 
           <div className="prose">

@@ -1,7 +1,7 @@
 ---
 title: Marty AI & Government Chatbot Platform
 slug: marty-ai
-status: active
+status: live
 year_started: 2024
 client: Van Buren County / St. Joseph County
 featured: false

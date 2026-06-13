@@ -27,15 +27,6 @@
   flex-wrap: wrap;
   gap: 5px;
 }
-
-.statusDot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: currentColor;
-  flex-shrink: 0;
-}
-
 .titleLink {
   text-decoration: none;
   color: inherit;
@@ -108,4 +99,10 @@
   font-family: var(--font-mono);
   font-size: 12px;
   color: var(--text-muted);
+}
+
+.card > :last-child {
+  margin-top: 4px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
 }

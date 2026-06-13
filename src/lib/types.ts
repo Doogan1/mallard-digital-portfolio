@@ -1,4 +1,6 @@
-export type ProjectStatus = 'active' | 'complete' | 'in-progress' | 'archived';
+import type { ProjectStatus } from './projectStatus'
+
+export type { ProjectStatus } from './projectStatus'
 
 export interface Project {
   title: string;

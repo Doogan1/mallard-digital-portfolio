@@ -1,0 +1,50 @@
+.track {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--text-muted);
+}
+
+.trackCompact {
+  font-size: 10px;
+}
+
+.stepGroup {
+  display: inline-flex;
+  align-items: center;
+}
+
+.connector {
+  margin: 0 5px;
+  color: var(--border);
+  user-select: none;
+}
+
+.connectorPast {
+  color: rgba(122, 127, 148, 0.45);
+}
+
+.step {
+  white-space: nowrap;
+}
+
+.stepPast {
+  color: rgba(122, 127, 148, 0.55);
+}
+
+.stepCurrent {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.stepFuture {
+  color: rgba(122, 127, 148, 0.28);
+}
+
+.dot {
+  color: var(--text);
+}

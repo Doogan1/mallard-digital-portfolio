@@ -3,6 +3,7 @@ import type { Project } from '../lib/types'
 import { getProjectSkillCategories } from '../lib/skills'
 import SkillCategoryBadge from './SkillCategoryBadge'
 import StackTag from './StackTag'
+import StatusTrack from './StatusTrack'
 import styles from './ProjectCard.module.css'
 
 interface Props {
@@ -11,13 +12,6 @@ interface Props {
   onTagClick?: (tag: string) => void;
 }
 
-const STATUS_LABELS: Record<string, string> = {
-  active: 'Active',
-  complete: 'Complete',
-  'in-progress': 'In Progress',
-  archived: 'Archived',
-};
-
 export default function ProjectCard({ project, highlightTag, onTagClick }: Props) {
   const visibleTags = project.stack.slice(0, 5)
   const skillCategories = getProjectSkillCategories(project)
@@ -25,10 +19,6 @@ export default function ProjectCard({ project, highlightTag, onTagClick }: Props
   return (
     <article className={styles.card}>
       <div className={styles.topRow}>
-        <span className={`badge badge--${project.status}`}>
-          <span className={styles.statusDot} />
-          {STATUS_LABELS[project.status]}
-        </span>
         <div className={styles.categoryTags}>
           {skillCategories.map((category) => (
             <SkillCategoryBadge key={category} category={category} />
@@ -72,6 +62,8 @@ export default function ProjectCard({ project, highlightTag, onTagClick }: Props
           <span className={styles.year}>{project.year_started}</span>
         </div>
       </div>
+
+      <StatusTrack status={project.status} compact />
     </article>
   )
 }

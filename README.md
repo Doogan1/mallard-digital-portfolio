@@ -20,6 +20,7 @@ Open `http://localhost:5173/drake-olejniczak/`.
 
 1. Create `projects/your-slug.md` following the frontmatter schema in any existing project file
 2. Required fields: `title`, `slug`, `status`, `year_started`, `stack`, `summary`
+   - `status`: `planning` | `development` | `pilot` | `live` | `maintained`
 3. Run `npm run build` (or push — deploy script handles it)
 
 ## Build

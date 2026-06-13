@@ -75,25 +75,6 @@ code, kbd, samp, pre {
   padding: 0 24px;
 }
 
-/* Status badge */
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 500;
-  padding: 2px 8px;
-  border-radius: 999px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.badge--active    { background: rgba(61,214,140,0.15); color: var(--success); }
-.badge--complete  { background: rgba(74,158,255,0.15); color: var(--accent); }
-.badge--in-progress { background: rgba(124,106,247,0.15); color: var(--accent-violet); }
-.badge--archived  { background: rgba(122,127,148,0.15); color: var(--text-muted); }
-
 /* Stack tag pill — category colors applied via inline styles from skills.ts */
 .tag {
   display: inline-block;

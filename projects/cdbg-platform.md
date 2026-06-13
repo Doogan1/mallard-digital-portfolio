@@ -1,7 +1,7 @@
 ---
 title: CDBG Home Rehabilitation Platform
 slug: cdbg-platform
-status: active
+status: development
 year_started: 2026
 client: Market One / Van Buren & Cass Counties
 featured: true
