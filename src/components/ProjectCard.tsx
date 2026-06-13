@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom'
 import type { Project } from '../lib/types'
+import { getProjectSkillCategories } from '../lib/skills'
+import SkillCategoryBadge from './SkillCategoryBadge'
 import StackTag from './StackTag'
 import styles from './ProjectCard.module.css'
 
@@ -17,7 +19,8 @@ const STATUS_LABELS: Record<string, string> = {
 };
 
 export default function ProjectCard({ project, highlightTag, onTagClick }: Props) {
-  const visibleTags = project.stack.slice(0, 5);
+  const visibleTags = project.stack.slice(0, 5)
+  const skillCategories = getProjectSkillCategories(project)
 
   return (
     <article className={styles.card}>
@@ -26,7 +29,11 @@ export default function ProjectCard({ project, highlightTag, onTagClick }: Props
           <span className={styles.statusDot} />
           {STATUS_LABELS[project.status]}
         </span>
-        <span className="cat-tag">{project.category}</span>
+        <div className={styles.categoryTags}>
+          {skillCategories.map((category) => (
+            <SkillCategoryBadge key={category} category={category} />
+          ))}
+        </div>
       </div>
 
       <Link to={`/projects/${project.slug}`} className={styles.titleLink}>

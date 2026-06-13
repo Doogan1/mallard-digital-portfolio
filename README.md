@@ -19,7 +19,7 @@ Open `http://localhost:5173/drake-olejniczak/`.
 ## Adding a Project
 
 1. Create `projects/your-slug.md` following the frontmatter schema in any existing project file
-2. Required fields: `title`, `slug`, `status`, `category`, `year_started`, `stack`, `summary`
+2. Required fields: `title`, `slug`, `status`, `year_started`, `stack`, `summary`
 3. Run `npm run build` (or push — deploy script handles it)
 
 ## Build

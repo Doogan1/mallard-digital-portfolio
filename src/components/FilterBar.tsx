@@ -1,4 +1,3 @@
-import type { ProjectCategory } from '../lib/types'
 import type { SkillCategory } from '../lib/skills'
 import {
   SKILL_CATEGORIES,
@@ -9,31 +8,18 @@ import type { Project } from '../lib/types'
 import StackTag from './StackTag'
 import styles from './FilterBar.module.css'
 
-const PROJECT_CATEGORIES: { value: ProjectCategory | 'all'; label: string }[] = [
-  { value: 'all', label: 'All' },
-  { value: 'agentic-ai', label: 'Agentic AI' },
-  { value: 'data-engineering', label: 'Data Engineering' },
-  { value: 'full-stack', label: 'Full Stack' },
-  { value: 'platform', label: 'Platform' },
-  { value: 'infrastructure', label: 'Infrastructure' },
-]
-
 interface Props {
   projects: Project[]
-  activeCategory: ProjectCategory | 'all'
   activeSkillCategory: SkillCategory | 'all'
   activeTag: string | null
-  onCategoryChange: (cat: ProjectCategory | 'all') => void
   onSkillCategoryChange: (cat: SkillCategory | 'all') => void
   onTagChange: (tag: string | null) => void
 }
 
 export default function FilterBar({
   projects,
-  activeCategory,
   activeSkillCategory,
   activeTag,
-  onCategoryChange,
   onSkillCategoryChange,
   onTagChange,
 }: Props) {
@@ -42,23 +28,7 @@ export default function FilterBar({
   return (
     <div className={styles.wrapper}>
       <div className={styles.group}>
-        <span className={styles.label}>Project</span>
-        <div className={styles.pills}>
-          {PROJECT_CATEGORIES.map(({ value, label }) => (
-            <button
-              key={value}
-              type="button"
-              className={`${styles.pill} ${activeCategory === value ? styles.pillActive : ''}`}
-              onClick={() => onCategoryChange(value as ProjectCategory | 'all')}
-            >
-              {label}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div className={styles.group}>
-        <span className={styles.label}>Technology</span>
+        <span className={styles.label}>Category</span>
         <div className={styles.pills}>
           <button
             type="button"

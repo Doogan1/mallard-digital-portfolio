@@ -2,7 +2,6 @@
 title: Skills & Project Network
 slug: skills-network
 status: in-progress
-category: data-engineering
 year_started: 2026
 live_url: https://portfolio.mallard-digital.com/drake-olejniczak/skills
 featured: false

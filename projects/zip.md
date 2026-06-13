@@ -2,7 +2,6 @@
 title: ZIP — Zoning Intelligence Platform
 slug: zip
 status: active
-category: agentic-ai
 year_started: 2025
 client: Van Buren County / DICE
 live_url: https://zip.dicemi.org

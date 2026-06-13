@@ -33,8 +33,15 @@
 .headerMeta {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 16px;
+}
+
+.categoryTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
 }
 
 .dot {

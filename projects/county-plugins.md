@@ -2,7 +2,6 @@
 title: County Website Plugin Ecosystem
 slug: county-plugins
 status: active
-category: platform
 year_started: 2025
 client: Van Buren County / St. Joseph County
 featured: false

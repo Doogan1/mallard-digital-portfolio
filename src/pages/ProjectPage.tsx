@@ -4,9 +4,11 @@ import remarkGfm from 'remark-gfm'
 import { getProject } from '../lib/parseProjects'
 import {
   getSkillCategory,
+  getProjectSkillCategories,
   SKILL_CATEGORIES,
   SKILL_CATEGORY_ORDER,
 } from '../lib/skills'
+import SkillCategoryBadge from '../components/SkillCategoryBadge'
 import StackTag from '../components/StackTag'
 import styles from './ProjectPage.module.css'
 
@@ -23,6 +25,7 @@ export default function ProjectPage() {
 
   if (!project) return <Navigate to="/projects" replace />
 
+  const skillCategories = getProjectSkillCategories(project)
   const stackByCategory = SKILL_CATEGORY_ORDER.map((category) => ({
     category,
     tags: project.stack.filter((tag) => getSkillCategory(tag) === category),
@@ -45,7 +48,11 @@ export default function ProjectPage() {
                 <span className={styles.dot} />
                 {STATUS_LABELS[project.status]}
               </span>
-              <span className="cat-tag">{project.category}</span>
+              <div className={styles.categoryTags}>
+                {skillCategories.map((category) => (
+                  <SkillCategoryBadge key={category} category={category} />
+                ))}
+              </div>
             </div>
             <h1 className={styles.title}>{project.title}</h1>
             <p className={styles.summary}>{project.summary}</p>

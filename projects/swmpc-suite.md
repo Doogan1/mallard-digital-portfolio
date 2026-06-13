@@ -2,7 +2,6 @@
 title: SWMPC Website Suite
 slug: swmpc-suite
 status: complete
-category: platform
 year_started: 2025
 year_ended: 2026
 client: Southwest Michigan Planning Commission

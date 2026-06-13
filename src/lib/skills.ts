@@ -201,3 +201,10 @@ export function projectMatchesSkillCategory(
   if (category === 'all') return true
   return project.stack.some((tag) => getSkillCategory(tag) === category)
 }
+
+/** Unique skill categories present in a project's stack, in display order. */
+export function getProjectSkillCategories(project: Project): SkillCategory[] {
+  return SKILL_CATEGORY_ORDER.filter(
+    (c) => c !== 'other' && project.stack.some((tag) => getSkillCategory(tag) === c),
+  )
+}
