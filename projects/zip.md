@@ -57,7 +57,7 @@ The chunks are sized to fit cleanly in context while preserving enough surroundi
 ## Infrastructure
 
 - **Cloud Run**: stateless FastAPI backend, autoscaled to zero between uses
-- **Cloud SQL (PostgreSQL + pgvector + PostGIS)**: single database for both ordinance chunks and parcel geometry
+- **Cloud SQL (PostgreSQL + pgvector + PostGIS)**: ordinance chunks and parcel geometry; parcel layers are loaded and refreshed via the County Data Services pipeline (GDAL/ogr2ogr, Sqitch-managed schemas on the shared county instance)
 - **Cloud Armor**: load balancer with WAF rules protecting the public endpoint
 - **Docker Compose**: local development mirrors production — same database schema, same API surface
 - **Cloud Build**: CI/CD pipeline for automated builds on push to main

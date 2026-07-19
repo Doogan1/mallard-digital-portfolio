@@ -27,6 +27,8 @@ Core DB is the administrative interface for the county personnel data that power
 
 The data it manages: ~1,000 active personnel records, ~60 departments, and the assignment records that tie them together (a person can hold multiple assignments across departments). This is the authoritative source — changes here propagate to the public directory automatically.
 
+Core DB runs against the same **Cloud SQL PostgreSQL instance** as the county GIS and parcel layers, in separate schemas. Schema deploys for the shared database are managed in the County Data Services repo (Sqitch); this application owns the staff UI and API for `core` personnel data only.
+
 ## Authentication: OTP Magic Link
 
 No password database. Authentication works as follows:

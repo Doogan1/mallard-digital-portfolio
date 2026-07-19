@@ -35,7 +35,7 @@ The platform digitizes the full application workflow across 10 municipalities, f
 The intake flow is a guided, stateful multi-step form with validation at each step:
 
 1. **Household composition** — number of residents, ages, relationship to applicant
-2. **Property lookup** — applicants search by owner name, parcel number, or address; selection pre-fills property data and derives True Market Value (SEV × 2) from the county parcel database
+2. **Property lookup** — applicants search by owner name, parcel number, or address; selection pre-fills property data and derives True Market Value (SEV × 2) from the county PostGIS parcel layer (loaded via County Data Services)
 3. **SSN collection** — Social Security numbers for all household members, encrypted client-side before transmission using Cloud KMS; never stored in plaintext at any layer
 4. **Citizenship declarations** — per HUD Form 10-F requirements, one declaration per household member
 5. **Income checklist** — 32 income/asset line items per HUD Form 10-G; sources include wages, Social Security, pensions, rental income, assets
