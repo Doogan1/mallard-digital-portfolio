@@ -16,9 +16,9 @@ stack:
   - Claude Batch API
   - Cloud SQL
 summary: >
-  Eight custom WordPress plugins powering the public websites for Van Buren County and
-  St. Joseph County. PostgreSQL serves as the canonical data source; WordPress is the
-  rendering layer. A 15-minute WP-Cron sync keeps them in lockstep.
+  Eight custom WordPress plugins in a shared monorepo, powering VBC and SJC county sites from
+  PostgreSQL via county-core sync — plus tag-based releases to Nexcess hosts through the
+  dice-devops deploy CLI and inventory matrix.
 ---
 
 ## Architectural Decision: PostgreSQL as Source of Truth
@@ -27,9 +27,13 @@ WordPress's built-in data model — posts, meta, terms — is flexible but diffi
 
 The solution: **PostgreSQL as the canonical data source, WordPress as the rendering layer**.
 
-All authoritative data lives in Cloud SQL (PostgreSQL). WordPress sites pull from it via a 15-minute WP-Cron sync — data flows one direction, from the database into WordPress transient caches and custom tables. When a staff member's title changes in the core database, it appears on both county websites within 15 minutes without any manual duplication.
+All authoritative directory data lives in Cloud SQL (PostgreSQL), in schemas managed by **County Data Services** and edited upstream through **Core DB**. WordPress sites pull from it via a 15-minute WP-Cron sync — data flows one direction, from the database into WordPress transient caches and custom tables. When a staff member's title changes in the core database, it appears on both county websites within 15 minutes without manual duplication.
 
-Multi-tenancy is handled via a `county_id` field on every shared table. The same plugin codebase serves vanburencountymi.gov and stjosephcountymi.gov with different data in scope.
+Multi-tenancy is handled via `COUNTY_TENANT_ID` in `wp-config.php` (e.g. `VBC`, `SJC`). The same **county-website-plugins** monorepo serves vanburencountymi.gov and stjosephcountymi.gov with different data in scope. Fields synced from PostgreSQL are read-only in WordPress; edits happen in Core DB or the source system.
+
+## Monorepo vs legacy standalone stack
+
+The eight plugins below ship together in the **county-website-plugins** GitHub monorepo (one WordPress plugin entry point that loads county-core, county-directory, county-events, etc.). St. Joseph County production and the in-progress Van Buren v2 site run this monorepo (tagged releases such as **v2.3.0**). Van Buren v1 production still runs an older standalone-plugin layout; staging uses the monorepo as the migration path.
 
 ## The 8 Plugins
 
@@ -56,3 +60,21 @@ Emergency alert system with scheduling, multiple color themes, and a preset libr
 
 ### County Alt Text
 WCAG accessibility compliance for media libraries. Uses the Anthropic Batch API (Vision) to generate descriptive alt text for uploaded images. Running a full media library costs approximately **$2** via the Batch API. The plugin operates in two modes: bulk processing of the existing library, and a per-upload hook that generates alt text automatically for new uploads. Surfaces generated text in the WordPress media editor for staff review before publishing.
+
+## Deployment & release (dice-devops)
+
+Releases no longer depend on dragging files over SSH by hand. The separate **dice-devops** repo is the deployment control plane for this plugin suite (and other managed WordPress code across DICE sites).
+
+**Inventory in git** — `servers.yml`, `plugins.yml`, and `matrix.yml` record which plugin versions should be on which Nexcess host (VBC/SJC prod and staging, plus partner sites). The matrix is the source of truth for what's supposed to be installed where.
+
+**CLI deploy** — from dice-devops:
+
+```bash
+./scripts/deploy.sh county-website-plugins v2.4.0 sjc-prod
+```
+
+The script resolves plugin and server metadata from the inventory, checks out the **git tag** in the local `county-website-plugins` clone, enables WordPress **maintenance mode**, syncs files over SSH (tar stream to the remote plugin directory), writes a **`.version.json`** manifest (version, commit SHA, timestamp, deployer), flushes cache, and drops maintenance mode. Per-server **RSA 4096** deploy keys are required — Nexcess does not reliably accept ed25519.
+
+That gives every install a auditable version stamp and a repeatable path from tag → production. GitHub Actions workflows in dice-devops (`workflow_dispatch` deploy, nightly probe → dashboard) are being wired up (Linear DIC-476 / DIC-475); the **deploy.sh** path is what we use today for promoted releases.
+
+An onboarding **dashboard** (`dashboard/index.html`) compiles inventory YAML into a view of sites, SSH targets, and which custom plugins are active vs legacy — useful when standing up a new county host or debugging drift between servers.

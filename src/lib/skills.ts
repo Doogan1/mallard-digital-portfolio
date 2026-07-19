@@ -5,6 +5,7 @@ export type SkillCategory =
   | 'backend'
   | 'data-engineering'
   | 'cloud-infrastructure'
+  | 'devops'
   | 'ai-ml'
   | 'cms-platform'
   | 'automation'
@@ -15,6 +16,7 @@ export const SKILL_CATEGORY_ORDER: SkillCategory[] = [
   'backend',
   'data-engineering',
   'cloud-infrastructure',
+  'devops',
   'ai-ml',
   'cms-platform',
   'automation',
@@ -29,6 +31,7 @@ export const SKILL_CATEGORIES: Record<
   backend: { label: 'Backend', color: '#3dd68c', rgb: '61, 214, 140' },
   'data-engineering': { label: 'Data Engineering', color: '#f5a623', rgb: '245, 166, 35' },
   'cloud-infrastructure': { label: 'Cloud & Infrastructure', color: '#7c6af7', rgb: '124, 106, 247' },
+  devops: { label: 'DevOps & CI/CD', color: '#38bdf8', rgb: '56, 189, 248' },
   'ai-ml': { label: 'AI & ML', color: '#ff6b9d', rgb: '255, 107, 157' },
   'cms-platform': { label: 'CMS & Platforms', color: '#50e3c2', rgb: '80, 227, 194' },
   automation: { label: 'Automation & Integration', color: '#94a3b8', rgb: '148, 163, 184' },
@@ -75,10 +78,13 @@ export const SKILL_REGISTRY: Record<string, SkillCategory> = {
   'Cloud Storage': 'cloud-infrastructure',
   'Cloud KMS': 'cloud-infrastructure',
   'Cloud Armor': 'cloud-infrastructure',
-  'Cloud Build': 'cloud-infrastructure',
   'Docker': 'cloud-infrastructure',
   'Firebase Hosting': 'cloud-infrastructure',
   'Nexcess': 'cloud-infrastructure',
+
+  // DevOps & CI/CD
+  'Cloud Build': 'devops',
+  'GitHub Actions': 'devops',
 
   // AI & ML
   'Claude API': 'ai-ml',

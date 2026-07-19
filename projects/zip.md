@@ -60,10 +60,10 @@ The chunks are sized to fit cleanly in context while preserving enough surroundi
 - **Cloud SQL (PostgreSQL + pgvector + PostGIS)**: ordinance chunks and parcel geometry; parcel layers are loaded and refreshed via the County Data Services pipeline (GDAL/ogr2ogr, Sqitch-managed schemas on the shared county instance)
 - **Cloud Armor**: load balancer with WAF rules protecting the public endpoint
 - **Docker Compose**: local development mirrors production — same database schema, same API surface
-- **Cloud Build**: CI/CD pipeline for automated builds on push to main
+- **Cloud Build** (`cloudbuild.yaml`): push to `main` builds the container, pushes to Artifact Registry, and deploys Cloud Run — the handoff path for GIS staff extending map and ordinance data without local Docker expertise
 
 ## My Role
 
 Built entirely solo, end-to-end — from the initial PDF parsing pipeline through the agent architecture, PostGIS integration, MapLibre frontend, and Cloud Run deployment.
 
-The project is now in a maintenance and extension phase. I've set up a Cloud Build CI/CD pipeline so that Jerry, a GIS developer and Director at Van Buren County, can extend the map layers and ordinance data independently without requiring my direct involvement on every change. The handoff pattern — clear build pipeline, documented schema, working CI — is something I try to build into every project I hand over.
+The project is now in a maintenance and extension phase. **Cloud Build** on `main` plus documented schema and CI give Jerry, a GIS developer and Director at Van Buren County, a path to extend map layers and ordinance data independently. That same pattern — automated build, clear promotion path, no deploy-from-laptop — shows up across DICE repos (GitHub Actions on CDBG and county-data-services, Cloud Build here).

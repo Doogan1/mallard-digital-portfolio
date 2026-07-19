@@ -15,7 +15,7 @@ stack:
 summary: >
   Schema migrations and GIS ingestion for the shared county Cloud SQL instance — loading
   assessor parcels and other spatial layers from shapefiles into PostGIS, with Sqitch-managed
-  deploys. Downstream apps (ZIP, CDBG, directory sync) read from separate schemas on the same database.
+  deploys. Downstream apps (ZIP, parcel viewer, directory sync) consume schemas on the same database.
 ---
 
 ## What It Is
@@ -49,11 +49,14 @@ Using GDAL/ogr2ogr keeps the pipeline standard and debuggable: any GIS person ca
 
 | Consumer | Use |
 |----------|-----|
-| **ZIP** | Map click → parcel attributes and geometry from PostGIS; agent tools query structured parcel fields |
-| **CDBG platform** | Property lookup by owner, parcel ID, or address against the parcel layer |
+| **ZIP / parcel viewer** | Parcel geometry, tiles, and assessing joins in `geo.*`; map products read via PostGIS views and APIs |
 | **Core DB / County plugins** | Personnel in `core.*`; not GIS, but same Cloud SQL instance and Sqitch deploy discipline |
 
-ZIP and CDBG are **readers** of the spatial layers this repo maintains. Core DB is a **reader/writer** of personnel data in sibling schemas. County Data Services is where those worlds stay coherent at the infrastructure layer.
+ZIP and the parcel viewer stack are **readers** of the spatial layers this repo maintains. Core DB is a **reader/writer** of personnel data in sibling schemas. County Data Services is where those worlds stay coherent at the infrastructure layer.
+
+## Applying changes
+
+Schema and load work is **git-tracked and repeatable**, not ad hoc in the Cloud SQL console. Sqitch plans live in the repo; deploy/revert/verify scripts are applied in a defined order (with local tooling such as `apply_migrations.ps1` where documented in the repo). GIS loads are scripted commands — typically `ogr2ogr` invocations checked into the repo — so a parcel refresh or new layer can be reproduced by anyone with access, not only from one developer laptop.
 
 ## Why It's a Separate Portfolio Project
 

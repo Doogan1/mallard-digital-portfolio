@@ -18,10 +18,11 @@ stack:
   - Cloud Storage
   - Brevo
   - Firebase Auth
+  - GitHub Actions
 summary: >
   A guided digital intake platform replacing paper-based HUD grant applications across 10 municipalities.
-  Handles sensitive PII collection, server-side PDF generation, and municipality-scoped staff review workflows
-  for Community Development Block Grant home rehabilitation programs.
+  Handles sensitive PII collection, server-side PDF generation, municipality-scoped staff review workflows,
+  and a GitHub Actions pipeline with isolated staging and manual production promotion.
 ---
 
 ## What It Replaces
@@ -35,8 +36,8 @@ The platform digitizes the full application workflow across 10 municipalities, f
 The intake flow is a guided, stateful multi-step form with validation at each step:
 
 1. **Household composition** — number of residents, ages, relationship to applicant
-2. **Property lookup** — applicants search by owner name, parcel number, or address; selection pre-fills property data and derives True Market Value (SEV × 2) from the county PostGIS parcel layer (loaded via County Data Services)
-3. **SSN collection** — Social Security numbers for all household members, encrypted client-side before transmission using Cloud KMS; never stored in plaintext at any layer
+2. **Property & municipality** — applicants enter property and location details; the Cloud Run backend calls the county **parcel viewer API** to map ZIP/city to one of the 10 program municipalities (CDBG runs on an isolated GCP project with Firestore, not the shared PostGIS instance)
+3. **SSN collection** — Social Security numbers for household members; encrypted via **Cloud KMS** on the server before write to Firestore; masked form stored for display; never persisted in plaintext
 4. **Citizenship declarations** — per HUD Form 10-F requirements, one declaration per household member
 5. **Income checklist** — 32 income/asset line items per HUD Form 10-G; sources include wages, Social Security, pensions, rental income, assets
 6. **Document upload** — document requirements are generated dynamically based on the household's income selections; if a member declared rental income, supporting documents for rental income appear
@@ -68,7 +69,18 @@ Firestore security rules enforce municipality scoping at the data layer — a st
 This platform handles some of the most sensitive data in social services: Social Security numbers, household income records, citizenship status. The security decisions were deliberate:
 
 - **Firestore rules block all direct client writes** — every mutation goes through the server-side API, which enforces authentication, authorization, and audit logging before touching the database
-- **Cloud KMS encryption** for SSNs — encrypted before leaving the browser, decrypted only server-side when generating the PDF packet; never stored as plaintext
+- **Cloud KMS encryption** for SSNs — encrypted on the API before Firestore write; decrypted only when generating the PDF packet
 - **Pre-production security audit** validated PII handling, Firestore rule coverage, and API authorization logic before launch
 
-Phase 1 launched May 20, 2026. Phase 2 — staff review workflow with document annotation and award tracking — targeted June 19, 2026.
+## Deployment & CI/CD
+
+CDBG uses a **trunk-based, tag-to-promote** pipeline across two GCP projects: production (`swmpc-491818`) and staging (`cdbg-staging`), each with its own Firestore, Storage, KMS keyring, and Firebase Auth so staging never touches real applicant data.
+
+- **Feature branches** (named for the Linear ticket) → PR → merge to `main`
+- **Staging** — every merge to `main` auto-deploys via **GitHub Actions** (`deploy-staging.yml`): build frontend, deploy Cloud Run backend, sync Firebase Hosting
+- **Production** — always **manual**: `workflow_dispatch` on `deploy-production.yml` after verification on staging; no auto-promote to prod
+- **Auth in CI** — **Workload Identity Federation** with a per-project `github-actions-deployer` service account; no long-lived JSON keys in GitHub
+
+That pattern is the reference for how DICE is moving as the team grows: predictable staging, explicit production promotion, and credentials that aren't tied to a personal account.
+
+Phase 1 (applicant intake) launched May 20, 2026. Phase 2 — applicant profiles, municipal staff login, document accept/reject — is in active development.
