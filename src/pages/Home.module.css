@@ -99,6 +99,24 @@
   margin-top: -12px;
 }
 
+.sectionSubInline {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-top: 6px;
+  line-height: 1.5;
+  max-width: 520px;
+}
+
+.inlineLink {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.inlineLink:hover {
+  text-decoration: underline;
+}
+
 .seeAll {
   font-size: 13px;
   font-weight: 500;
@@ -164,6 +182,34 @@
 .aboutBody strong {
   color: var(--text);
   font-weight: 600;
+}
+
+.aboutHeading {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-top: 12px;
+  letter-spacing: -0.01em;
+}
+
+.aboutList {
+  margin: 0;
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.aboutList li {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+.aboutCode {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  color: var(--text);
 }
 
 @media (max-width: 640px) {

@@ -6,7 +6,7 @@ year_started: 2025
 year_ended: 2026
 client: Southwest Michigan Planning Commission
 live_url: https://swmpc.org
-featured: true
+featured: false
 stack:
   - Python
   - PHP 8

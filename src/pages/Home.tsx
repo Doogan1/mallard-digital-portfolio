@@ -21,13 +21,18 @@ export default function Home() {
         <div className="container">
           <div className={styles.heroInner}>
             <div className={styles.heroText}>
-              <p className={styles.heroEyebrow}>AI &amp; Data Engineer</p>
+              <p className={styles.heroEyebrow}>Applied AI Engineer</p>
               <h1 className={styles.heroName}>Drake Olejniczak</h1>
               <p className={styles.heroTagline}>
-                Building production AI systems, data pipelines, and full-stack platforms —
-                working directly with stakeholders to turn complex problems into working software.
+                I ship production LLM and agentic systems — tool use, RAG-style retrieval,
+                vision pipelines — on real data with the full-stack discipline to deploy, secure,
+                and hand off. Spec-driven workflow; AI-assisted implementation; human review
+                on everything that merges.
               </p>
               <div className={styles.heroLinks}>
+                <Link to="/skills" className={`${styles.heroLink} ${styles.heroLinkPrimary}`}>
+                  Skills network →
+                </Link>
                 <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className={styles.heroLink}>
                   GitHub ↗
                 </a>
@@ -38,7 +43,7 @@ export default function Home() {
                   href="/drake-olejniczak/Drake-Olejniczak-Resume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`${styles.heroLink} ${styles.heroLinkPrimary}`}
+                  className={styles.heroLink}
                 >
                   Resume PDF ↗
                 </a>
@@ -52,7 +57,13 @@ export default function Home() {
       <section className={styles.section}>
         <div className="container">
           <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>Featured Projects</h2>
+            <div>
+              <h2 className={styles.sectionTitle}>Featured Work</h2>
+              <p className={styles.sectionSubInline}>
+                Agentic assistants, county chatbots, and production platforms where AI meets
+                compliance and real users.
+              </p>
+            </div>
             <Link to="/projects" className={styles.seeAll}>
               All projects →
             </Link>
@@ -74,7 +85,12 @@ export default function Home() {
         <div className="container">
           <h2 className={styles.sectionTitle}>Technology Stack</h2>
           <p className={styles.sectionSub}>
-            Derived from {projects.length} production projects across AI, data, and full-stack engineering.
+            Derived from {projects.length} production projects — weighted toward the data,
+            cloud, and application layers that support applied AI in government and civic
+            contexts.{' '}
+            <Link to="/skills" className={styles.inlineLink}>
+              Explore the co-occurrence graph →
+            </Link>
           </p>
           <div className={styles.stackGroups}>
             {SKILL_CATEGORY_ORDER.map((category) => {
@@ -109,31 +125,72 @@ export default function Home() {
           <div className={styles.about}>
             <h2 className={styles.sectionTitle}>About</h2>
             <div className={styles.aboutBody}>
-            <p>
-              Ph.D. in mathematics (graph theory, Western Michigan University) turned
-              production AI and data engineer. I build end-to-end — agentic AI systems,
-              data pipelines, full-stack platforms — and work directly with the
-              stakeholders who will use what I ship. The problems I solve are real and
-              immediate: a planning office fielding the same zoning questions all day, a
-              grant administrator processing paper applications across ten municipalities,
-              three legacy government websites that needed to be off Classic ASP by March 31st.
-            </p>
-            <p>
-              I'm a Digital Solutions Specialist at Van Buren County's 
-              Digital Information Department, operating under <strong>DICE (Digital Innovation
-              Collaborative Exchange)</strong> — an intergovernmental agreement serving
-              Van Buren County, St. Joseph County, and regional partners including Market
-              One and the Southwest Michigan Planning Commission. In practice that means
-              I build production software for multiple government clients from a single
-              team, with the infrastructure decisions and deployment patterns I establish
-              becoming the standard across all of them.
-            </p>
-            <p>
-              I co-founded <strong>MI-GAIN</strong> (Michigan Government AI Network), a
-              statewide peer network for government AI practitioners, and stay engaged in
-              the broader question of how public institutions can responsibly adopt AI —
-              not as a philosophical exercise, but as someone actively building those systems.
-            </p>
+              <p>
+                Ph.D. in mathematics (graph theory, Western Michigan University). I work as
+                an applied AI engineer in practice: designing agent loops, retrieval and tool
+                interfaces, and the surrounding APIs, data stores, and deploy pipelines so
+                models actually reach users — not demo slides.
+              </p>
+              <p>
+                Representative work includes <strong>ZIP</strong> (Claude tool use over zoning
+                ordinances and PostGIS parcels), <strong>Marty AI</strong> (production county
+                chatbots plus a custom Anthropic agent for Find-a-Ride), and{' '}
+                <strong>County Alt Text</strong> (Claude Vision + Batch API for WCAG alt text
+                at scale). I also own full platforms where AI is one layer among many — e.g. the
+                CDBG digital intake system — because shipping in regulated environments means
+                auth, encryption, and CI matter as much as the prompt.
+              </p>
+              <p>
+                I&apos;m a Digital Solutions Specialist at Van Buren County&apos;s Digital
+                Information Department under{' '}
+                <strong>DICE (Digital Innovation Collaborative Exchange)</strong>, building
+                for Van Buren and St. Joseph Counties and partners such as Market One and the
+                Southwest Michigan Planning Commission. I co-founded{' '}
+                <strong>MI-GAIN</strong> (Michigan Government AI Network), a statewide peer
+                network for public-sector AI practitioners.
+              </p>
+
+              <h3 className={styles.aboutHeading}>How I work</h3>
+              <p>
+                I use AI-assisted development deliberately — not as a shortcut around
+                engineering judgment, but to move faster while keeping work auditable and
+                maintainable. The goal is production code a teammate can read, deploy, and
+                extend.
+              </p>
+              <ul className={styles.aboutList}>
+                <li>
+                  <strong>Linear first</strong> — issues carry scope and acceptance criteria
+                  before implementation; descriptions stay the spec, comments carry status.
+                </li>
+                <li>
+                  <strong>AI as implementation leverage</strong> — Cursor and Claude Code for
+                  drafts, refactors, and API exploration; I review for data models, security,
+                  and operational fit before merge.
+                </li>
+                <li>
+                  <strong>Small, traceable changes</strong> — PRs tied to tickets; staging
+                  environments where stakes are high (e.g. CDBG auto-deploy to staging, manual
+                  production promotion).
+                </li>
+                <li>
+                  <strong>Auditable artifacts</strong> — Sqitch migrations, GitHub Actions and
+                  Cloud Build, deploy manifests (such as{' '}
+                  <code className={styles.aboutCode}>.version.json</code> on WordPress
+                  releases), conversation logging pipelines for chatbots.
+                </li>
+                <li>
+                  <strong>Human gates on risk</strong> — PII, KMS, Firestore rules, and
+                  production promotion stay explicit decisions, not model defaults.
+                </li>
+              </ul>
+              <p>
+                This portfolio is built the same way: project content in git,{' '}
+                <Link to="/skills" className={styles.inlineLink}>
+                  skills network
+                </Link>{' '}
+                regenerated on every push via GitHub Actions. The process and the product are
+                aligned.
+              </p>
             </div>
           </div>
         </div>
