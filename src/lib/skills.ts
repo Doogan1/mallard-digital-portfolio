@@ -42,6 +42,8 @@ export const SKILL_CATEGORIES: Record<
 export const SKILL_REGISTRY: Record<string, SkillCategory> = {
   // Web Development
   'React': 'web-development',
+  'Vue': 'web-development',
+  'JavaScript': 'web-development',
   'TypeScript': 'web-development',
   'Vite': 'web-development',
   'D3.js': 'web-development',
@@ -54,6 +56,7 @@ export const SKILL_REGISTRY: Record<string, SkillCategory> = {
   // Backend
   'Python': 'backend',
   'FastAPI': 'backend',
+  'Django': 'backend',
   'Node.js': 'backend',
   'Express': 'backend',
   'PHP 8': 'backend',
@@ -62,6 +65,8 @@ export const SKILL_REGISTRY: Record<string, SkillCategory> = {
   // Data Engineering
   'PostgreSQL': 'data-engineering',
   'MySQL': 'data-engineering',
+  'SQLite': 'data-engineering',
+  'NetworkX': 'data-engineering',
   'BigQuery': 'data-engineering',
   'pgvector': 'data-engineering',
   'PostGIS': 'data-engineering',
@@ -78,6 +83,7 @@ export const SKILL_REGISTRY: Record<string, SkillCategory> = {
   'Cloud Run': 'cloud-infrastructure',
   'Cloud SQL': 'cloud-infrastructure',
   'Cloud Storage': 'cloud-infrastructure',
+  'Cloudflare R2': 'cloud-infrastructure',
   'Cloud KMS': 'cloud-infrastructure',
   'Cloud Armor': 'cloud-infrastructure',
   'Docker': 'cloud-infrastructure',
@@ -106,6 +112,7 @@ export const SKILL_REGISTRY: Record<string, SkillCategory> = {
 
   // Automation & Integration
   'Google Apps Script': 'automation',
+  'Linear API': 'automation',
   'Looker Studio': 'automation',
 }
 
