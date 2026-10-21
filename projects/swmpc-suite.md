@@ -21,7 +21,8 @@ stack:
 summary: >
   Three public-facing websites built and launched under a hard March 31, 2026 deadline,
   replacing a Classic ASP / Microsoft Access stack for the Southwest Michigan Planning Commission.
-  Includes a fully custom interactive Leaflet.js map and 8 WordPress plugins.
+  Covers shared data migration and site-specific WordPress plugins for planning records,
+  transportation information, and an interactive heritage-trail map.
 ---
 
 ## The Project
@@ -62,18 +63,21 @@ The us12heritagetrail.com site centers on an interactive map of the 212-mile US-
 
 The map data is managed through WordPress custom post types, so SWMPC staff can add and update points without touching code.
 
-## Plugin Ecosystem
+## Plugin Development by Website
 
-Eight custom WordPress plugins delivered:
+### SWMPC — Planning Records and Public Information
 
-- **swmpc-permissions** — three-tier role architecture shared across all three sites via a network-aware design: admin, staff, and public contributor roles with capability sets tuned to each site's editorial workflow
-- **swmpc-meetings** — meeting archive with minutes/agenda document attachments, filterable by committee and date range
-- **swmpc-traffic-counts** — 2,784 count locations in a custom database table, JOIN-based filtering by location and year
-- **swmpc-documents** — document library with category taxonomy and search
-- **swmpc-transit** — 56 transit providers across 153 jurisdictions, with service area maps
-- **swmpc-pois** — points of interest backing the US-12 map
-- **us12-asset-map** — the Leaflet.js interactive map described above
-- **mwt-transit-lookup** — mywaythere.org transit provider search by county
+The planning commission site brings meeting records, documents, and traffic-count data into WordPress. Custom plugin work includes meeting archives with agenda and minutes attachments, document categories and search, and traffic-count queries over custom tables. Shared permissions support editorial roles across the suite.
+
+### MyWayThere — Transportation Discovery
+
+MyWayThere combines transportation provider information, service coverage, and eligibility guidance. Its current plugin monorepo contains **find-a-ride** (structured search and maps), **mwt-ride-agent** (a conversational interface over the transportation data), and **mywaythere-customizations** (service content types, taxonomy and table synchronization, and meeting shortcodes).
+
+The matching engine and recent iterations have their own [Find-a-Ride project entry](/drake-olejniczak/projects/find-a-ride). Its demo links to staging, which hosts the latest tool within the site's ongoing redesign ahead of migration to production.
+
+### US-12 Heritage Trail — Points of Interest and Interactive Map
+
+Custom point-of-interest management supplies the heritage-trail map described above. WordPress content and taxonomy let staff maintain destinations, while Leaflet provides category filtering and region-specific map views without maintaining separate maps for every landing page.
 
 ## Legacy URL Redirect Map
 
