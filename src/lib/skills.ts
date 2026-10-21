@@ -73,6 +73,8 @@ export const SKILL_REGISTRY: Record<string, SkillCategory> = {
   'Google Sheets': 'data-engineering',
 
   // Cloud & Infrastructure
+  'Google Cloud': 'cloud-infrastructure',
+  'Compute Engine': 'cloud-infrastructure',
   'Cloud Run': 'cloud-infrastructure',
   'Cloud SQL': 'cloud-infrastructure',
   'Cloud Storage': 'cloud-infrastructure',

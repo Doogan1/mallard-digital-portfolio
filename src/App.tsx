@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Nav from './components/Nav'
+import ScrollToTop from './components/ScrollToTop'
 import Home from './pages/Home'
 import Projects from './pages/Projects'
 import ProjectPage from './pages/ProjectPage'
@@ -8,6 +9,7 @@ import Skills from './pages/Skills'
 export default function App() {
   return (
     <BrowserRouter basename="/drake-olejniczak">
+      <ScrollToTop />
       <Nav />
       <main>
         <Routes>
